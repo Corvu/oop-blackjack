@@ -6,7 +6,7 @@ public class Mängija {
         }
         Scanner s=new Scanner(System.in);
         System.out.println(" Kui vajutatud 1, võtta veel kaardi; kui 2, hoida: ");
-        int valik=(int) valueof(s.nextLine());
+        int valik=Integer.valueof(s.nextLine());
         return valik;
     }
       public static void näida_tulemus(){
