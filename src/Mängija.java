@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Mängija {
-      public static int näida_lauda(kaardidMängija, kaardidDiiler){
+      public static int näidaLauda(kaardidMängija, kaardidDiiler){
         for (int i = 0; i < kaardidMängija.lenght; i++) {
             System.out.print("|"+kaardidMängija[i]+"|   ")
         }
