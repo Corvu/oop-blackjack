@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Mängija {
       public static void näida_mängu(){
 
