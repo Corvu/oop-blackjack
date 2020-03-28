@@ -17,7 +17,7 @@ public class Mängija {
         System.out.println("Mängi arvutiga ja proovi oma õnne.");
         Scanner s= new Scanner(System.in);
         System.out.println("Kui soovid alustada mängu sisesta 1, vastasel juhul 0:");
-        String sisestatud=s.nextLine();
+        int sisestatud=Integer.valueof(s.nextLine());
         return sisestatud;
     }
     
