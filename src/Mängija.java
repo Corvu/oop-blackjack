@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Mängija {
-      public static int näidaLauda(kaardidMängija, kaardidDiiler){
+      public static int näidaLauda(String[] kaardidMängija,String[] kaardidDiiler){
         for (int i = 0; i < kaardidMängija.lenght; i++) {
             System.out.print("|"+kaardidMängija[i]+"|   ")
         }
@@ -9,7 +9,7 @@ public class Mängija {
         int valik=(int) valueof(s.nextLine());
         return valik;
     }
-      public static void näida_mängu(){
+      public static void näida_tulemus(){
 
     }
     public static void näida_peamenüü(){
