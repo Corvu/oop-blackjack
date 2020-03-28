@@ -12,14 +12,13 @@ public class Mängija {
       public static void näida_tulemus(){
 
     }
-    public static void näida_peamenüü(){
+   public static int näida_peamenüü(){
         System.out.println("Tere tulemast, mängusse blackjack!");
         System.out.println("Mängi arvutiga ja proovi oma õnne.");
         Scanner s= new Scanner(System.in);
-        System.out.println("Kui soovid alustada mängu sisesta 'start':");
+        System.out.println("Kui soovid alustada mängu sisesta 1, vastasel juhul 0:");
         String sisestatud=s.nextLine();
-        if (sisestatud=="start"){
-            näida_mängu();
-        }
+        return sisestatud;
     }
+    
 }
