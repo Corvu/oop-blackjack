@@ -14,11 +14,11 @@ public class Kaardipakk {
         }
         return kaardipakk;
     }
-    public static String[] võta_kaardi(String [] kaardipakk){
-        System.out.println(kaardipakk[0]);
+  public static String võta_kaardi(String [] kaardipakk){
+        ülemine_kaart=kaardipakk[0];
         String[] eemaldatud_kaardiga=removeElement(kaardipakk);
         kaardipakk=eemaldatud_kaardiga;
-        return kaardipakk;
+        return ülemine_kaart;
     }
     public static String[] removeElement(String[] kaardipakk){
         String[] eemaldatud_kaardiga=new String[kaardipakk.length-1];
