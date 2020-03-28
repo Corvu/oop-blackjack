@@ -6,7 +6,7 @@ public class Mängija {
         }
         Scanner s=new Scanner(System.in);
         System.out.println(" Kui vajutatud 1, võtta veel kaardi; kui 2, hoida: ");
-        int valik=Integer.valueof(s.nextLine());
+        int valik=s.nextInt();
         return valik;
     }
       public static void näida_tulemus(){
@@ -17,7 +17,7 @@ public class Mängija {
         System.out.println("Mängi arvutiga ja proovi oma õnne.");
         Scanner s= new Scanner(System.in);
         System.out.println("Kui soovid alustada mängu sisesta 1, vastasel juhul 0:");
-        int sisestatud=Integer.valueof(s.nextLine());
+        int sisestatud=s.nextInt());
         return sisestatud;
     }
     
