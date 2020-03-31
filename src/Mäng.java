@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 public class Mäng {
 
-    private String[] kaardipakk;
+    private Kaardipakk kaardipakk;
     private Diiler diiler;
     private ArrayList<String> kaardidMängija;
     private ArrayList<String> kaardidDiiler;
 
     // Mängu klassi konstruktor;
     public Mäng() {
-        this.kaardipakk = Kaardipakk.genereerida_uue();
+        this.kaardipakk = new Kaardipakk();
         this.diiler = new Diiler();
     }
 
@@ -40,13 +40,13 @@ public class Mäng {
         // Võetakse kaardi tähe ilma mastita
         String täht = kaart.substring(0, 1);
         int väärtus = -1;
-        if (täht == "J" || täht == "Q" || täht == "K") {
+        if (täht.equals("J") || täht.equals("Q") || täht.equals("K")) {
             väärtus = 10;
         }
-        else if (täht == "A" && !ületanudÄss) {
+        else if (täht.equals("A") && !ületanudÄss) {
             väärtus = 11;
         }
-        else if (täht == "A" && ületanudÄss) {
+        else if (täht.equals("A") && ületanudÄss) {
             väärtus = 1;
         }
         else {
@@ -62,10 +62,10 @@ public class Mäng {
             // Iga tsükkel on üks partii
             kaardidDiiler = new ArrayList<>();
             kaardidMängija = new ArrayList<>();
-            kaardidDiiler.add(Kaardipakk.võta_kaardi(kaardipakk));
-            kaardidDiiler.add(Kaardipakk.võta_kaardi(kaardipakk));
-            kaardidMängija.add(Kaardipakk.võta_kaardi(kaardipakk));
-            kaardidMängija.add(Kaardipakk.võta_kaardi(kaardipakk));
+            kaardidDiiler.add(kaardipakk.võta_kaardi());
+            kaardidDiiler.add(kaardipakk.võta_kaardi());
+            kaardidMängija.add(kaardipakk.võta_kaardi());
+            kaardidMängija.add(kaardipakk.võta_kaardi());
 
             // Nüüd mängukontroll läheb mängija kätte
             while(true) {
@@ -74,7 +74,7 @@ public class Mäng {
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
-                        kaardidMängija.add(Kaardipakk.võta_kaardi(kaardipakk));
+                        kaardidMängija.add(kaardipakk.võta_kaardi());
                     case 2:
                         hoida = true;
                 }
@@ -89,7 +89,7 @@ public class Mäng {
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
-                        kaardidDiiler.add(Kaardipakk.võta_kaardi(kaardipakk));
+                        kaardidDiiler.add(kaardipakk.võta_kaardi());
                     case 2:
                         hoida = true;
                 }
