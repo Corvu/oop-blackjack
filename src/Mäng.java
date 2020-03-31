@@ -70,25 +70,31 @@ public class Mäng {
             // Nüüd mängukontroll läheb mängija kätte
             while(true) {
                 int otsus = Mängija.näidaLauda(kaardidMängija, kaardidDiiler);
+                boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
                         kaardidMängija.add(Kaardipakk.võta_kaardi(kaardipakk));
                     case 2:
-                        break;
+                        hoida = true;
                 }
+                if (hoida)
+                    break;
             }
 
             // Nüüd diiler teeb oma otsused
             while(true) {
                 int otsus = Diiler.otsustada(kaardidDiiler);
+                boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
                         kaardidDiiler.add(Kaardipakk.võta_kaardi(kaardipakk));
                     case 2:
-                        break;
+                        hoida = true;
                 }
+                if (hoida)
+                    break;
             }
 
             // Võrrelda kaartide summat
