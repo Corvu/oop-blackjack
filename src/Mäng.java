@@ -123,8 +123,15 @@ public class Mäng {
             }
 
             // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-            Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
+            
+            int valik1=Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
 
+            if (valik1==0){
+                break;
+            }
+            else{
+                continue;
+            }
         }
     }
 
