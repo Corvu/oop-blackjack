@@ -13,6 +13,26 @@ public class Mäng {
         this.diiler = new Diiler();
     }
 
+    // Arvutada punkti summat käes
+    // TODO veenduda, et ässi korral summa arvutatakse korrektselt
+    public static int arvutadaPunkte(ArrayList<String> kaardid) {
+        int summa = 0;
+        boolean ületanudÄss = false;
+        // Esimene proov - eeldame, et summma ei ületa 21
+        for (String kaart : kaardid) {
+            summa += parseKaardi(kaart, ületanudÄss);
+        }
+        // Kui summa on üle 21, proovida arvutada jälle, kasutades ässi 1-punktiga
+        if (summa > 21) {
+            summa = 0;
+            ületanudÄss = true;
+            for (String kaart : kaardid) {
+                summa += parseKaardi(kaart, ületanudÄss);
+            }
+        }
+        return summa;
+    }
+
     // Parseerida kaardi väärtuse;
     // ületanudÄss on lipp, mis märkab, kas äss annab 1 või 11 punkti
     public static int parseKaardi(String kaart, boolean ületanudÄss) {
@@ -75,29 +95,8 @@ public class Mäng {
             int summaDiiler = 0;
             boolean ületanudÄssMängija = false;
             boolean ületanudÄssDiiler = false;
-            // Mängija summa
-            for (String kaart : kaardidMängija) {
-                summaMängija += parseKaardi(kaart, ületanudÄssMängija);
-            }
-            // Kui summa on üle 21, proovida arvutada jälle, kasutades ässi 1-punktiga
-            if (summaMängija > 21) {
-                summaMängija = 0;
-                ületanudÄssMängija = true;
-                for (String kaart : kaardidMängija) {
-                    summaMängija += parseKaardi(kaart, ületanudÄssMängija);
-                }
-            }
-            // Diileri summa
-            for (String kaart : kaardidDiiler) {
-                summaDiiler += parseKaardi(kaart, ületanudÄssDiiler);
-            }
-            if (summaDiiler > 21) {
-                summaDiiler = 0;
-                ületanudÄssDiiler = true;
-                for (String kaart : kaardidDiiler) {
-                    summaDiiler += parseKaardi(kaart, ületanudÄssDiiler);
-                }
-            }
+            summaMängija = arvutadaPunkte(kaardidMängija);
+            summaDiiler = arvutadaPunkte(kaardidDiiler);
 
             // Võrrelda punktid
             int võit = 0;
