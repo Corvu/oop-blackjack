@@ -1,3 +1,4 @@
+
 import java.util.Random;
 public class Kaardipakk {
   public static String[] genereerida_uue() {
@@ -15,7 +16,7 @@ public class Kaardipakk {
         return kaardipakk;
     }
   public static String võta_kaardi(String [] kaardipakk){
-        ülemine_kaart=kaardipakk[0];
+        String ülemine_kaart=kaardipakk[0];
         String[] eemaldatud_kaardiga=removeElement(kaardipakk);
         kaardipakk=eemaldatud_kaardiga;
         return ülemine_kaart;

@@ -1,9 +1,11 @@
+
+
 import java.util.ArrayList;
 
 public class Diiler {
 
     // Diileri otsustuse reeglite implementeerimine
-    public int otsustada(ArrayList<String> kaardidDiiler) {
+    public static int otsustada(ArrayList<String> kaardidDiiler) {
 
         // Arvutada summa käes
         int summaDiiler = 0;

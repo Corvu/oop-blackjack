@@ -1,15 +1,28 @@
+
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Mängija {
-      public static int näidaLauda(String[] kaardidMängija,String[] kaardidDiiler){
-        for (int i = 0; i < kaardidMängija.lenght; i++) {
-            System.out.print("|"+kaardidMängija[i]+"|   ")
+      public static int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler){
+        for (int i = 0; i < kaardidMängija.size(); i++) {
+            System.out.print("|"+kaardidMängija.get(i)+"|   ");
         }
         Scanner s=new Scanner(System.in);
         System.out.println(" Kui vajutatud 1, võtta veel kaardi; kui 2, hoida: ");
         int valik=s.nextInt();
         return valik;
     }
-      public static void näida_tulemus(){
+      public static void näida_tulemus(int võit, int summaMängija, int summaDiiler){
+          System.out.println("Sinu tulemus: "+summaMängija);
+          System.out.println("Diileri tulemus: "+summaDiiler);
+          if (võit>0){
+              System.out.println("Õnnitlen, oled võitja!");
+          }
+          else if(võit<0){
+              System.out.println("Diiler võitis, järgmine kord vedab. :)");
+          }
+          else{
+              System.out.println("Mäng jäi viiki.");
+          }
 
     }
    public static int näida_peamenüü(){
@@ -17,7 +30,7 @@ public class Mängija {
         System.out.println("Mängi arvutiga ja proovi oma õnne.");
         Scanner s= new Scanner(System.in);
         System.out.println("Kui soovid alustada mängu sisesta 1, vastasel juhul 0:");
-        int sisestatud=s.nextInt());
+        int sisestatud=s.nextInt();
         return sisestatud;
     }
     

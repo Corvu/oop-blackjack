@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Mäng {
@@ -60,7 +61,7 @@ public class Mäng {
 
             // Nüüd diiler teeb oma otsused
             while(true) {
-                int otsus = diiler.otsustada(kaardidDiiler);
+                int otsus = Diiler.otsustada(kaardidDiiler);
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
