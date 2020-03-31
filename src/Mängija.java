@@ -25,6 +25,10 @@ public class Mängija {
           else{
               System.out.println("Mäng jäi viiki.");
           }
+          Scanner s=new Scanner(System.in);
+          System.out.println("Kui soovid alustada uut partii sisesta 1, loobumise soovil 0: ");
+          int valik=s.nextInt();
+          return valik;  
 
     }
       //Tervitab mängijat ja pakkub alustada mängu
