@@ -1,5 +1,7 @@
+
 import java.util.Random;
 public class Kaardipakk {
+  //genereerib uut segatud kaardipakki
   public static String[] genereerida_uue() {
         String[] kaardipakk = {"2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠", "10♠", "J♠", "Q♠", "K♠", "A♠", "2♣", "3♣", "4♣", "5♣", "6♣",
                 "7♣", "8♣", "9♣", "10♣", "J♣", "Q♣", "K♣", "A♣", "2♥", "3♥", "4♥", "5♥", "6♥", "7♥", "8♥", "9♥", "10♥", "J♥", "Q♥", "K♥",
@@ -14,12 +16,14 @@ public class Kaardipakk {
         }
         return kaardipakk;
     }
+  //võtab ülemist kaarti kaardipakkist ja eemaldab kaardipakkist ülemist kaarti
   public static String võta_kaardi(String [] kaardipakk){
-        ülemine_kaart=kaardipakk[0];
+        String ülemine_kaart=kaardipakk[0];
         String[] eemaldatud_kaardiga=removeElement(kaardipakk);
         kaardipakk=eemaldatud_kaardiga;
         return ülemine_kaart;
     }
+  //eemaldab esimest elementi massiivist
     public static String[] removeElement(String[] kaardipakk){
         String[] eemaldatud_kaardiga=new String[kaardipakk.length-1];
         for (int i = 1; i < kaardipakk.length; i++) {
