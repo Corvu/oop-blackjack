@@ -57,8 +57,7 @@ public class Mäng {
 
     // Alustada mängu; mäng lõpetab mängija soovil
     void alustadaMängu() {
-        boolean mäng=true;
-        while(mäng) {
+        while(true) {
 
             // Iga tsükkel on üks partii
             kaardidDiiler = new ArrayList<>();
@@ -75,19 +74,21 @@ public class Mäng {
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 0:
-                        mäng=false;
+                        return;
                     case 1:
                         kaardidMängija.add(kaardipakk.võta_kaardi());
+                        break;
                     case 2:
                         hoida = true;
+                        break;
                 }
-                if (hoida){
-                    break;}
+                if (hoida)
+                    break;
 
             }
 
             // Nüüd diiler teeb oma otsused
-            while (mäng) {
+            while (true) {
                 int otsus = Diiler.otsustada(kaardidDiiler);
                 boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
@@ -100,41 +101,29 @@ public class Mäng {
                 if (hoida)
                     break;
             }
-            if (mäng) {
-                // Võrrelda kaartide summat
-                int summaMängija = 0;
-                int summaDiiler = 0;
-                boolean ületanudÄssMängija = false;
-                boolean ületanudÄssDiiler = false;
-                summaMängija = arvutadaPunkte(kaardidMängija);
-                summaDiiler = arvutadaPunkte(kaardidDiiler);
 
-                // Võrrelda punktid
-                int võit = 0;
-                if (summaMängija > 21 && summaDiiler > 21)
-                    võit = 0;
-                else if (summaMängija > 21 && summaDiiler <= 21)
-                    võit = -1;
-                else if (summaDiiler > 21 && summaMängija <= 21)
-                    võit = 1;
-                else {
-                    if (summaMängija > summaDiiler)
-                        võit = 1;
-                    else if (summaDiiler > summaMängija)
-                        võit = -1;
-                    else
-                        võit = 0;
-                }
+            // Võrrelda kaartide summat
+            int summaMängija = 0;
+            int summaDiiler = 0;
+            boolean ületanudÄssMängija = false;
+            boolean ületanudÄssDiiler = false;
+            summaMängija = arvutadaPunkte(kaardidMängija);
+            summaDiiler = arvutadaPunkte(kaardidDiiler);
 
-                // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
+            // Võrrelda punktid
+            int võit = 0;
+            if (summaMängija > 21 && summaDiiler > 21)
+                võit = 0;
+            else if (summaMängija > 21)
+                võit = -1;
+            else if (summaDiiler > 21)
+                võit = 1;
+            else
+                võit = Integer.compare(summaMängija, summaDiiler);
 
-                int valik1 = Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
+            // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
+            Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
 
-                if (valik1 == 0) {
-                    break; } 
-                else {
-                    continue; }
-            }
         }
     }
 

@@ -14,9 +14,11 @@ public class Main {
                 case 1:
                     Mäng mäng = new Mäng();
                     mäng.alustadaMängu();
+                    break;
                 case 0:
                     return;
             }
+
         }
     }
 }

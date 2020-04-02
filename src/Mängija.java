@@ -13,23 +13,18 @@ public class Mängija {
         return valik;
     }
       //väljastab mängija ja diileri punktid ning teatab, kes on võitja 
-      public static int näida_tulemus(int võit, int summaMängija, int summaDiiler){
+      public static void näida_tulemus(int võit, int summaMängija, int summaDiiler){
           System.out.println("Sinu tulemus: "+summaMängija);
           System.out.println("Diileri tulemus: "+summaDiiler);
-          if (võit>0){
+          if (võit>0) {
               System.out.println("Õnnitlen, oled võitja!");
           }
-          else if(võit<0){
+          else if (võit<0) {
               System.out.println("Diiler võitis, järgmine kord vedab. :)");
           }
-          else{
+          else {
               System.out.println("Mäng jäi viiki.");
           }
-          Scanner s=new Scanner(System.in);
-          System.out.println("Kui soovid alustada uut partii sisesta 1, loobumise soovil 0: ");
-          int valik=s.nextInt();
-          return valik;  
-
     }
       //Tervitab mängijat ja pakkub alustada mängu
    public static int näida_peamenüü(){
