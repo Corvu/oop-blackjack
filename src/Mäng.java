@@ -57,7 +57,8 @@ public class Mäng {
 
     // Alustada mängu; mäng lõpetab mängija soovil
     void alustadaMängu() {
-        while(true) {
+        boolean mäng=true;
+        while(mäng) {
 
             // Iga tsükkel on üks partii
             kaardidDiiler = new ArrayList<>();
@@ -68,22 +69,25 @@ public class Mäng {
             kaardidMängija.add(kaardipakk.võta_kaardi());
 
             // Nüüd mängukontroll läheb mängija kätte
-            while(true) {
+            while (true) {
                 int otsus = Mängija.näidaLauda(kaardidMängija, kaardidDiiler);
                 boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
+                    case 0:
+                        mäng=false;
                     case 1:
                         kaardidMängija.add(kaardipakk.võta_kaardi());
                     case 2:
                         hoida = true;
                 }
-                if (hoida)
-                    break;
+                if (hoida){
+                    break;}
+
             }
 
             // Nüüd diiler teeb oma otsused
-            while(true) {
+            while (mäng) {
                 int otsus = Diiler.otsustada(kaardidDiiler);
                 boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
@@ -96,41 +100,40 @@ public class Mäng {
                 if (hoida)
                     break;
             }
+            if (mäng) {
+                // Võrrelda kaartide summat
+                int summaMängija = 0;
+                int summaDiiler = 0;
+                boolean ületanudÄssMängija = false;
+                boolean ületanudÄssDiiler = false;
+                summaMängija = arvutadaPunkte(kaardidMängija);
+                summaDiiler = arvutadaPunkte(kaardidDiiler);
 
-            // Võrrelda kaartide summat
-            int summaMängija = 0;
-            int summaDiiler = 0;
-            boolean ületanudÄssMängija = false;
-            boolean ületanudÄssDiiler = false;
-            summaMängija = arvutadaPunkte(kaardidMängija);
-            summaDiiler = arvutadaPunkte(kaardidDiiler);
-
-            // Võrrelda punktid
-            int võit = 0;
-            if (summaMängija > 21 && summaDiiler > 21)
-                võit = 0;
-            else if (summaMängija > 21 && summaDiiler <= 21)
-                võit = -1;
-            else if (summaDiiler > 21 && summaMängija <= 21)
-                võit = 1;
-            else {
-                if (summaMängija > summaDiiler)
-                    võit = 1;
-                else if (summaDiiler > summaMängija)
-                    võit = -1;
-                else
+                // Võrrelda punktid
+                int võit = 0;
+                if (summaMängija > 21 && summaDiiler > 21)
                     võit = 0;
-            }
+                else if (summaMängija > 21 && summaDiiler <= 21)
+                    võit = -1;
+                else if (summaDiiler > 21 && summaMängija <= 21)
+                    võit = 1;
+                else {
+                    if (summaMängija > summaDiiler)
+                        võit = 1;
+                    else if (summaDiiler > summaMängija)
+                        võit = -1;
+                    else
+                        võit = 0;
+                }
 
-            // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-            
-            int valik1=Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
+                // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
 
-            if (valik1==0){
-                break;
-            }
-            else{
-                continue;
+                int valik1 = Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
+
+                if (valik1 == 0) {
+                    break; } 
+                else {
+                    continue; }
             }
         }
     }
