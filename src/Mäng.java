@@ -62,10 +62,10 @@ public class Mäng {
             // Iga tsükkel on üks partii
             kaardidDiiler = new ArrayList<>();
             kaardidMängija = new ArrayList<>();
-            kaardidDiiler.add(kaardipakk.võta_kaardi());
-            kaardidDiiler.add(kaardipakk.võta_kaardi());
-            kaardidMängija.add(kaardipakk.võta_kaardi());
-            kaardidMängija.add(kaardipakk.võta_kaardi());
+            kaardidDiiler.add(kaardipakk.võtaKaardi());
+            kaardidDiiler.add(kaardipakk.võtaKaardi());
+            kaardidMängija.add(kaardipakk.võtaKaardi());
+            kaardidMängija.add(kaardipakk.võtaKaardi());
 
             // Nüüd mängukontroll läheb mängija kätte
             while (true) {
@@ -76,7 +76,7 @@ public class Mäng {
                     case 0:
                         return;
                     case 1:
-                        kaardidMängija.add(kaardipakk.võta_kaardi());
+                        kaardidMängija.add(kaardipakk.võtaKaardi());
                         break;
                     case 2:
                         hoida = true;
@@ -84,7 +84,6 @@ public class Mäng {
                 }
                 if (hoida)
                     break;
-
             }
 
             // Nüüd diiler teeb oma otsused
@@ -94,7 +93,7 @@ public class Mäng {
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
                     case 1:
-                        kaardidDiiler.add(kaardipakk.võta_kaardi());
+                        kaardidDiiler.add(kaardipakk.võtaKaardi());
                     case 2:
                         hoida = true;
                 }
@@ -122,7 +121,7 @@ public class Mäng {
                 võit = Integer.compare(summaMängija, summaDiiler);
 
             // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-            Mängija.näida_tulemus(võit, summaMängija, summaDiiler);
+            Mängija.näidaTulemus(võit, summaMängija, summaDiiler);
 
         }
     }

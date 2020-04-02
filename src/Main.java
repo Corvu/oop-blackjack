@@ -7,7 +7,7 @@ public class Main {
         while(true) {
 
             // Näida peamenüü la lugeda valutatud nuppu
-            int otsus = Mängija.näida_peamenüü();
+            int otsus = Mängija.näidaPeamenüü();
 
             // Kui mängija vajutas 1, alustada uut mängu; kui 0, väljuda programmist
             switch(otsus) {
