@@ -8,7 +8,7 @@ public class Mängija {
             System.out.print("|"+kaardidMängija.get(i)+"|   ");
         }
         Scanner s=new Scanner(System.in);
-        System.out.println(" Kui vajutatud 1, võtta veel kaardi; kui 2, hoida: ");
+        System.out.println(" Kui vajutatud 1, võtta veel kaardi; kui 2, hoida; loobumise soovil sisesta 0: ");
         int valik=s.nextInt();
         return valik;
     }
