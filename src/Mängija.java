@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Mängija {
+// Kasutaja liidese käsurea implementatsioon
+public class Mängija implements KasutajaLiides {
 
-    // Näitab mängijale kaardiid, mis tal on ja küsib otsust
-    public static int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler) {
+    // Näitab mängija käes olevad kaardiid ja küsib otsust
+    @Override
+    public int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler) {
         for (int i = 0; i < kaardidMängija.size(); i++) {
             System.out.print("|"+kaardidMängija.get(i)+"|   ");
         }
@@ -15,7 +17,8 @@ public class Mängija {
     }
 
     // Väljastab mängija ja diileri punktid ning teatab, kes on võitja
-    public static void näidaTulemus(int võit, int summaMängija, int summaDiiler) {
+    @Override
+    public void näidaTulemus(int võit, int summaMängija, int summaDiiler) {
         System.out.println("Sinu tulemus: " + summaMängija);
         System.out.println("Diileri tulemus: " + summaDiiler);
         if (võit > 0) {
@@ -30,7 +33,8 @@ public class Mängija {
     }
 
     // Tervitab mängijat ja pakkub alustada mängu
-    public static int näidaPeamenüü() {
+    @Override
+    public int näidaPeamenüü() {
         System.out.println("Tere tulemast, mängusse blackjack!");
         System.out.println("Mängi arvutiga ja proovi oma õnne.");
         Scanner s = new Scanner(System.in);
