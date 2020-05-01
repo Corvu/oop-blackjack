@@ -31,12 +31,37 @@ public class MängijaGraafiline implements KasutajaLiides{
 
     @Override
     public int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler) {
+        Text text=new Text();
+        String kaardid="";
+        for (int i = 0; i < kaardidMängija.size(); i++) {
+            kaardid+="|"+kaardidMängija.get(i)+"|   ";
+        }
+        text.setText(kaardid);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        text.setText("Vajuta 1, et võtta veel kaardi; vajuta 2, et hoida; loobumise soovil vajuta 0:");
+
         return 0;
     }
 
     @Override
     public void näidaTulemus(int võit, int summaMängija, int summaDiiler) {
-
+        Text text=new Text();
+        Text text2=new Text();
+        text.setText("Sinu tulemus: "+ summaMängija+"\n Diileri Tulemus: "+summaDiiler);
+        if (võit > 0) {
+            text2.setText("Õnnitlen, oled võitja!");
+        }
+        else if (võit < 0) {
+            text2.setText("Diiler võitis, järgmine kord vedab. :)");
+        }
+        else {
+            text2.setText("Mäng jäi viiki.");
+        }
+        BorderPane root=new BorderPane();
+        Scene peamenüü=new Scene(root,600,334);
+        stage.setScene(peamenüü);
+        root.setCenter(text);
+        root.setBottom(text2);
     }
 
     @Override
@@ -53,7 +78,7 @@ public class MängijaGraafiline implements KasutajaLiides{
         BorderPane root=new BorderPane();
 
         Scene peamenüü = new Scene(root,600,335);  // luuakse stseen
-
+        stage.setScene(peamenüü);
         root.setCenter(text);
 
 
