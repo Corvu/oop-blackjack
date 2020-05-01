@@ -2,8 +2,7 @@
 import java.util.ArrayList;
 
 public class Mäng {
-
-    private Kaardipakk kaardipakk;
+private Kaardipakk kaardipakk;
     private Diiler diiler;
     private ArrayList<String> kaardidMängija;
     private ArrayList<String> kaardidDiiler;
@@ -57,7 +56,8 @@ public class Mäng {
 
     // Alustada mängu; mäng lõpetab mängija soovil
     int i=0;
-    void alustadaMängu() {
+    void alustadaMängu() throws IOException {
+        FileWriter writer = new FileWriter("log.txt");
         while(true) {
             i++;
             // Iga tsükkel on üks partii
@@ -133,7 +133,7 @@ public class Mäng {
                 diileriKaardid+="|"+kaardidDiiler.get(i)+"|   ";
             }
 
-            try (FileWriter writer = new FileWriter("log.txt")) {
+            try ( writer) {
                 String partii="Partii nr."+i+"\n";
                 writer.write(partii);
                 writer.write("Mängija kaardid: "+mängijaKaardid+"\n"+ "Mängija punktid:"+summaMängija+"\n");
@@ -144,5 +144,7 @@ public class Mäng {
                 System.out.println(ex.getMessage());
             }
         }
+
     }
+   
 }
