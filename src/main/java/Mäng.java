@@ -1,4 +1,6 @@
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Mäng {
@@ -6,11 +8,13 @@ private Kaardipakk kaardipakk;
     private Diiler diiler;
     private ArrayList<String> kaardidMängija;
     private ArrayList<String> kaardidDiiler;
+    private KasutajaLiides kasutajaLiides;
 
-    // Mängu klassi konstruktor;
-    public Mäng() {
+    // Mängu klassi konstruktor; luues täpsustatakse kasutajaliides
+    public Mäng(KasutajaLiides kasutajaLiides) {
         this.kaardipakk = new Kaardipakk();
         this.diiler = new Diiler();
+        this.kasutajaLiides = kasutajaLiides;
     }
 
     // Arvutada punkti summat käes
@@ -70,7 +74,7 @@ private Kaardipakk kaardipakk;
 
             // Nüüd mängukontroll läheb mängija kätte
             while (true) {
-                int otsus = Mängija.näidaLauda(kaardidMängija, kaardidDiiler);
+                int otsus = kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
                 boolean hoida = false;
                 // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
                 switch (otsus) {
@@ -122,7 +126,7 @@ private Kaardipakk kaardipakk;
                 võit = Integer.compare(summaMängija, summaDiiler);
 
             // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-            Mängija.näidaTulemus(võit, summaMängija, summaDiiler);
+            kasutajaLiides.näidaTulemus(võit, summaMängija, summaDiiler);
             String mängijaKaardid="";
             String diileriKaardid="";
 

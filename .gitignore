@@ -1,3 +1,5 @@
 .idea
+.gradle
 oop-blackjack.iml
 out/
+build/

@@ -1,0 +1,20 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 11
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+application {
+    mainClassName = "Main"
+}
+
+// Seosta standartne input käsureada; ilma selleta see ei seostatud millegiga (või seostatud /dev/null-iga)
+run{
+    standardInput = System.in
+}
