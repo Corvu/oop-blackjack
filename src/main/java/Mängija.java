@@ -1,8 +1,27 @@
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // Kasutaja liidese käsurea implementatsioon
 public class Mängija implements KasutajaLiides {
+
+    Stage stage;
+
+    public Mängija(Stage stage) {
+        this.stage = stage;
+    }
+
+    @Override
+    public void show() {
+        // Käsureas liidese valmistamiseks midagi teha ei ole vaja
+    }
+
+    @Override
+    public void close() {
+        stage.show();
+        stage.close();
+    }
 
     // Näitab mängija käes olevad kaardiid ja küsib otsust
     @Override

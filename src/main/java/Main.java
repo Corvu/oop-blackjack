@@ -1,10 +1,14 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
 
-    public static void main(String[] args) {
+    @Override
+    public void start(Stage peaLava) throws Exception {
 
-        // Luuda uuse kasutajaliidese (siin on käsureane)
-        KasutajaLiides kasutajaLiides = new Mängija();
+        // Luuda uuse kasutajaliidese (käsureane või graafiline)
+        KasutajaLiides kasutajaLiides = new Mängija(peaLava);
+        kasutajaLiides.show();
 
         // Alustada lõpmatut tsüklit, kust iga kord võimalik kas uut mängu alustada või programmist väljuda
         while(true) {
@@ -19,9 +23,18 @@ public class Main {
                     mäng.alustadaMängu();
                     break;
                 case 0:
+                    kasutajaLiides.close();
                     return;
             }
 
         }
+
+    }
+
+    public static void main(String[] args) {
+
+        // Käivitada JavaFX application-i
+        launch(args);
+
     }
 }
