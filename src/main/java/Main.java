@@ -7,7 +7,7 @@ public class Main extends Application {
     public void start(Stage peaLava) throws Exception {
 
         // Luuda uuse kasutajaliidese (käsureane või graafiline)
-        KasutajaLiides kasutajaLiides = new Mängija(peaLava);
+        KasutajaLiides kasutajaLiides = new MängijaGraafiline(peaLava);
         kasutajaLiides.show();
 
         // Alustada lõpmatut tsüklit, kust iga kord võimalik kas uut mängu alustada või programmist väljuda
