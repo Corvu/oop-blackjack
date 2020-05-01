@@ -40,7 +40,26 @@ public class MängijaGraafiline implements KasutajaLiides{
         }
         text.setText(kaardid);
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        text.setText("Vajuta 1, et võtta veel kaardi; vajuta 2, et hoida; loobumise soovil vajuta 0:");
+        BorderPane root=new BorderPane();
+        Scene peamenüü=new Scene(root,600,334);
+        stage.setScene(peamenüü);
+        root.setCenter(text);
+        Button nupp1=new Button("Võtta veel kaart.");
+        nupp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
+        Button nupp2=new Button("Jätta seis.");
+        nupp2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+
+            }
+        });
+
 
     }
 
@@ -49,6 +68,8 @@ public class MängijaGraafiline implements KasutajaLiides{
         Text text=new Text();
         Text text2=new Text();
         text.setText("Sinu tulemus: "+ summaMängija+"\n Diileri Tulemus: "+summaDiiler);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         if (võit > 0) {
             text2.setText("Õnnitlen, oled võitja!");
         }
