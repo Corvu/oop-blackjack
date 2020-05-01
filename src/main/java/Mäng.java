@@ -11,7 +11,7 @@ private Kaardipakk kaardipakk;
     private KasutajaLiides kasutajaLiides;
 
     // Mängu klassi konstruktor; luues täpsustatakse kasutajaliides
-    public Mäng(KasutajaLiides kasutajaLiides) {
+    public Mäng() {
         this.kaardipakk = new Kaardipakk();
         this.diiler = new Diiler();
         this.kasutajaLiides = kasutajaLiides;
@@ -62,93 +62,87 @@ private Kaardipakk kaardipakk;
     int i=0;
     void alustadaMängu() throws IOException {
         FileWriter writer = new FileWriter("log.txt");
-        while(true) {
-            i++;
-            // Iga tsükkel on üks partii
-            kaardidDiiler = new ArrayList<>();
-            kaardidMängija = new ArrayList<>();
-            kaardidDiiler.add(kaardipakk.võtaKaardi());
-            kaardidDiiler.add(kaardipakk.võtaKaardi());
-            kaardidMängija.add(kaardipakk.võtaKaardi());
-            kaardidMängija.add(kaardipakk.võtaKaardi());
+        i++;
+        // Iga tsükkel on üks partii
+        kaardidDiiler = new ArrayList<>();
+        kaardidMängija = new ArrayList<>();
+        kaardidDiiler.add(kaardipakk.võtaKaardi());
+        kaardidDiiler.add(kaardipakk.võtaKaardi());
+        kaardidMängija.add(kaardipakk.võtaKaardi());
+        kaardidMängija.add(kaardipakk.võtaKaardi());
 
-            // Nüüd mängukontroll läheb mängija kätte
-            while (true) {
-                int otsus = kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
-                boolean hoida = false;
-                // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
-                switch (otsus) {
-                    case 0:
-                        return;
-                    case 1:
-                        kaardidMängija.add(kaardipakk.võtaKaardi());
-                        break;
-                    case 2:
-                        hoida = true;
-                        break;
-                }
-                if (hoida)
-                    break;
-            }
+        // Nüüd mängukontroll läheb mängija kätte
+        // kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
+        Main.kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
+        // boolean hoida = false;
+        // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
+        /*switch (otsus) {
+            case 0:
+                return;
+            case 1:
+                kaardidMängija.add(kaardipakk.võtaKaardi());
+                break;
+            case 2:
+                hoida = true;
+                break;
+        }
+        if (hoida)
+            break;*/
 
-            // Nüüd diiler teeb oma otsused
-            while (true) {
-                int otsus = Diiler.otsustada(kaardidDiiler);
-                boolean hoida = false;
-                // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
-                switch (otsus) {
-                    case 1:
-                        kaardidDiiler.add(kaardipakk.võtaKaardi());
-                    case 2:
-                        hoida = true;
-                }
-                if (hoida)
-                    break;
-            }
+        // Nüüd diiler teeb oma otsused
+        Diiler.otsustada(kaardidDiiler);
+        // hoida = false;
+        /*// Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
+        switch (otsus) {
+            case 1:
+                kaardidDiiler.add(kaardipakk.võtaKaardi());
+            case 2:
+                hoida = true;
+        }
+        if (hoida)
+            break;*/
 
-            // Võrrelda kaartide summat
-            int summaMängija = 0;
-            int summaDiiler = 0;
-            boolean ületanudÄssMängija = false;
-            boolean ületanudÄssDiiler = false;
-            summaMängija = arvutadaPunkte(kaardidMängija);
-            summaDiiler = arvutadaPunkte(kaardidDiiler);
+        // Võrrelda kaartide summat
+        int summaMängija = 0;
+        int summaDiiler = 0;
+        boolean ületanudÄssMängija = false;
+        boolean ületanudÄssDiiler = false;
+        summaMängija = arvutadaPunkte(kaardidMängija);
+        summaDiiler = arvutadaPunkte(kaardidDiiler);
 
-            // Võrrelda punktid
-            int võit = 0;
-            if (summaMängija > 21 && summaDiiler > 21)
-                võit = 0;
-            else if (summaMängija > 21)
-                võit = -1;
-            else if (summaDiiler > 21)
-                võit = 1;
-            else
-                võit = Integer.compare(summaMängija, summaDiiler);
+        // Võrrelda punktid
+        int võit = 0;
+        if (summaMängija > 21 && summaDiiler > 21)
+            võit = 0;
+        else if (summaMängija > 21)
+            võit = -1;
+        else if (summaDiiler > 21)
+            võit = 1;
+        else
+            võit = Integer.compare(summaMängija, summaDiiler);
 
-            // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-            kasutajaLiides.näidaTulemus(võit, summaMängija, summaDiiler);
-            String mängijaKaardid="";
-            String diileriKaardid="";
+        // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
+        Main.kasutajaLiides.näidaTulemus(võit, summaMängija, summaDiiler);
+        String mängijaKaardid="";
+        String diileriKaardid="";
 
-            for (int i = 0; i < kaardidMängija.size(); i++) {
-                mängijaKaardid+="|"+kaardidMängija.get(i)+"|   ";
-            }
-            for (int i = 0; i < kaardidDiiler.size(); i++) {
-                diileriKaardid+="|"+kaardidDiiler.get(i)+"|   ";
-            }
-
-            try ( writer) {
-                String partii="Partii nr."+i+"\n";
-                writer.write(partii);
-                writer.write("Mängija kaardid: "+mängijaKaardid+"\n"+ "Mängija punktid:"+summaMängija+"\n");
-                writer.write("Diileri kaardid: "+diileriKaardid+"\n"+"Diileri punktid: "+summaDiiler);
-                writer.flush();
-
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+        for (int i = 0; i < kaardidMängija.size(); i++) {
+            mängijaKaardid+="|"+kaardidMängija.get(i)+"|   ";
+        }
+        for (int i = 0; i < kaardidDiiler.size(); i++) {
+            diileriKaardid+="|"+kaardidDiiler.get(i)+"|   ";
         }
 
+        try ( writer) {
+            String partii="Partii nr."+i+"\n";
+            writer.write(partii);
+            writer.write("Mängija kaardid: "+mängijaKaardid+"\n"+ "Mängija punktid:"+summaMängija+"\n");
+            writer.write("Diileri kaardid: "+diileriKaardid+"\n"+"Diileri punktid: "+summaDiiler);
+            writer.flush();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
    
 }

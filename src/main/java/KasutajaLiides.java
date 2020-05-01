@@ -9,12 +9,12 @@ public interface KasutajaLiides {
     public void close();
 
     // Näitab mängija käes olevad kaardiid ja küsib otsust
-    public int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler);
+    public void näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler);
 
     // Väljastab mängija ja diileri punktid ning teatab, kes on võitja
     public void näidaTulemus(int võit, int summaMängija, int summaDiiler);
 
     // Tervitab mängijat ja pakkub alustada mängu
-    public int näidaPeamenüü();
+    public void näidaPeamenüü();
 
 }

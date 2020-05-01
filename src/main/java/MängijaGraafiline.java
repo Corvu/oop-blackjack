@@ -9,6 +9,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MängijaGraafiline implements KasutajaLiides{
@@ -22,6 +23,7 @@ public class MängijaGraafiline implements KasutajaLiides{
     @Override
     public void show() {
         stage.show();
+        näidaPeamenüü();
     }
 
     @Override
@@ -30,7 +32,7 @@ public class MängijaGraafiline implements KasutajaLiides{
     }
 
     @Override
-    public int näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler) {
+    public void näidaLauda(ArrayList<String> kaardidMängija, ArrayList<String> kaardidDiiler) {
         Text text=new Text();
         String kaardid="";
         for (int i = 0; i < kaardidMängija.size(); i++) {
@@ -40,7 +42,6 @@ public class MängijaGraafiline implements KasutajaLiides{
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         text.setText("Vajuta 1, et võtta veel kaardi; vajuta 2, et hoida; loobumise soovil vajuta 0:");
 
-        return 0;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class MängijaGraafiline implements KasutajaLiides{
     }
 
     @Override
-    public int näidaPeamenüü() {
+    public void näidaPeamenüü() {
          Text text=new Text();
         text.setText("          Tere tulemast, mängusse blackjack!\n" +
                      "          Mängi arvutiga ja proovi oma õnne.\n " +
@@ -81,17 +82,18 @@ public class MängijaGraafiline implements KasutajaLiides{
         stage.setScene(peamenüü);
         root.setCenter(text);
 
-
-
-        final int[] i = new int[1];
-
         Button nupp1 = new Button("Start"); // luuakse nupp
         nupp1.setPrefWidth(75);
         root.setBottom(nupp1);
         nupp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent me) {
-                i[0] = 1;
+                Mäng mäng = new Mäng();
+                try {
+                    mäng.alustadaMängu();
+                } catch (IOException ex) {
+                    // TODO
+                }
             }
         });
 
@@ -102,9 +104,8 @@ public class MängijaGraafiline implements KasutajaLiides{
         nupp2.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                i[0]=0;
+                close();
             }
         });
-        return i[0];
     }
 }
