@@ -12,12 +12,12 @@ public class MängijaGraafiline implements KasutajaLiides{
 
     @Override
     public void show() {
-
+        stage.show();
     }
 
     @Override
     public void close() {
-
+        stage.close();
     }
 
     @Override
