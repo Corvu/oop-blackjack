@@ -56,9 +56,10 @@ public class Mäng {
     }
 
     // Alustada mängu; mäng lõpetab mängija soovil
+    int i=0;
     void alustadaMängu() {
         while(true) {
-
+            i++;
             // Iga tsükkel on üks partii
             kaardidDiiler = new ArrayList<>();
             kaardidMängija = new ArrayList<>();
@@ -122,8 +123,26 @@ public class Mäng {
 
             // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
             Mängija.näidaTulemus(võit, summaMängija, summaDiiler);
+            String mängijaKaardid="";
+            String diileriKaardid="";
 
+            for (int i = 0; i < kaardidMängija.size(); i++) {
+                mängijaKaardid+="|"+kaardidMängija.get(i)+"|   ";
+            }
+            for (int i = 0; i < kaardidDiiler.size(); i++) {
+                diileriKaardid+="|"+kaardidDiiler.get(i)+"|   ";
+            }
+
+            try (FileWriter writer = new FileWriter("log.txt")) {
+                String partii="Partii nr."+i+"\n";
+                writer.write(partii);
+                writer.write("Mängija kaardid: "+mängijaKaardid+"\n"+ "Mängija punktid:"+summaMängija+"\n");
+                writer.write("Diileri kaardid: "+diileriKaardid+"\n"+"Diileri punktid: "+summaDiiler);
+                writer.flush();
+
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
-
 }
