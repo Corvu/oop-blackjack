@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Mäng {
-private Kaardipakk kaardipakk;
-    private Diiler diiler;
+
+    private Kaardipakk kaardipakk;
     private ArrayList<String> kaardidMängija;
     private ArrayList<String> kaardidDiiler;
-    private KasutajaLiides kasutajaLiides;
+    private Diiler diiler;
 
-    // Mängu klassi konstruktor; luues täpsustatakse kasutajaliides
     public Mäng() {
         this.kaardipakk = new Kaardipakk();
         this.diiler = new Diiler();
-        this.kasutajaLiides = kasutajaLiides;
     }
 
     // Arvutada punkti summat käes
@@ -59,70 +57,10 @@ private Kaardipakk kaardipakk;
     }
 
     // Alustada mängu; mäng lõpetab mängija soovil
-    int i=0;
+    //int i=0;
     void alustadaMängu() throws IOException {
-        FileWriter writer = new FileWriter("log.txt");
-        i++;
-        // Iga tsükkel on üks partii
-        kaardidDiiler = new ArrayList<>();
-        kaardidMängija = new ArrayList<>();
-        kaardidDiiler.add(kaardipakk.võtaKaardi());
-        kaardidDiiler.add(kaardipakk.võtaKaardi());
-        kaardidMängija.add(kaardipakk.võtaKaardi());
-        kaardidMängija.add(kaardipakk.võtaKaardi());
 
-        // Nüüd mängukontroll läheb mängija kätte
-        // kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
-        Main.kasutajaLiides.näidaLauda(kaardidMängija, kaardidDiiler);
-        // boolean hoida = false;
-        // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
-        /*switch (otsus) {
-            case 0:
-                return;
-            case 1:
-                kaardidMängija.add(kaardipakk.võtaKaardi());
-                break;
-            case 2:
-                hoida = true;
-                break;
-        }
-        if (hoida)
-            break;*/
-
-        // Nüüd diiler teeb oma otsused
-        Diiler.otsustada(kaardidDiiler);
-        // hoida = false;
-        /*// Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
-        switch (otsus) {
-            case 1:
-                kaardidDiiler.add(kaardipakk.võtaKaardi());
-            case 2:
-                hoida = true;
-        }
-        if (hoida)
-            break;*/
-
-        // Võrrelda kaartide summat
-        int summaMängija = 0;
-        int summaDiiler = 0;
-        boolean ületanudÄssMängija = false;
-        boolean ületanudÄssDiiler = false;
-        summaMängija = arvutadaPunkte(kaardidMängija);
-        summaDiiler = arvutadaPunkte(kaardidDiiler);
-
-        // Võrrelda punktid
-        int võit = 0;
-        if (summaMängija > 21 && summaDiiler > 21)
-            võit = 0;
-        else if (summaMängija > 21)
-            võit = -1;
-        else if (summaDiiler > 21)
-            võit = 1;
-        else
-            võit = Integer.compare(summaMängija, summaDiiler);
-
-        // Näida ekraanile partii tulemust - punktisummaid ja kes võitis
-        Main.kasutajaLiides.näidaTulemus(võit, summaMängija, summaDiiler);
+        /*
         String mängijaKaardid="";
         String diileriKaardid="";
 
@@ -142,7 +80,71 @@ private Kaardipakk kaardipakk;
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        }*/
+    }
+
+    public void diileriOsa() {
+        boolean hoida = false;
+        while (!hoida) {
+            int otsus = Diiler.otsustada(kaardidDiiler);
+            // Kui vajutatud 1, võtta veel kaardi; kui 2, hoida
+            switch (otsus) {
+                case 1:
+                    kaardidDiiler.add(kaardipakk.võtaKaardi());
+                    break;
+                case 2:
+                    hoida = true;
+                    break;
+                default:
+                    throw new RuntimeException("Ootamatu otsusekood (diiler)");
+            }
         }
     }
-   
+
+    public int arvutadaTulemus() {
+        // Võrrelda kaartide summat
+        int tulemus = 0;
+        int summaMängija = 0;
+        int summaDiiler = 0;
+        boolean ületanudÄssMängija = false;
+        boolean ületanudÄssDiiler = false;
+        summaMängija = Mäng.arvutadaPunkte(kaardidMängija);
+        summaDiiler = Mäng.arvutadaPunkte(kaardidDiiler);
+
+        // Võrrelda punktid
+        int võit = 0;
+        if (summaMängija > 21 && summaDiiler > 21)
+            võit = 0;
+        else if (summaMängija > 21)
+            võit = -1;
+        else if (summaDiiler > 21)
+            võit = 1;
+        else
+            võit = Integer.compare(summaMängija, summaDiiler);
+
+        return tulemus;
+
+    }
+
+    public void alustaUutPartii() {
+        // Anna mängijatele kaardid
+        kaardidDiiler = new ArrayList<>();
+        kaardidMängija = new ArrayList<>();
+        kaardidDiiler.add(kaardipakk.võtaKaardi());
+        kaardidDiiler.add(kaardipakk.võtaKaardi());
+        kaardidMängija.add(kaardipakk.võtaKaardi());
+        kaardidMängija.add(kaardipakk.võtaKaardi());
+    }
+
+    public void annaKaardiMängijale() {
+        kaardidMängija.add(kaardipakk.võtaKaardi());
+    }
+
+    public ArrayList<String> getKaardidMängija() {
+        return kaardidMängija;
+    }
+
+    public ArrayList<String> getKaardidDiiler() {
+        return kaardidDiiler;
+    }
 }

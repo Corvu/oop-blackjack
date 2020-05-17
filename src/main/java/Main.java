@@ -3,21 +3,18 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static KasutajaLiides kasutajaLiides;
+    public KasutajaLiides kasutajaLiides;
+    public Mäng mäng;
 
     @Override
     public void start(Stage peaLava) throws Exception {
-
         // Luuda uuse kasutajaliidese (käsureane või graafiline)
-        kasutajaLiides = new MängijaGraafiline(peaLava);
+        kasutajaLiides = new MängijaGraafiline(peaLava, mäng);
         kasutajaLiides.show();
-
     }
 
     public static void main(String[] args) {
-
         // Käivitada JavaFX application-i
         launch(args);
-
     }
 }
