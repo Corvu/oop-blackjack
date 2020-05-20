@@ -40,7 +40,7 @@ public class MängijaGraafiline implements KasutajaLiides {
         Text text = new Text();
         String kaardid = "";
         for (int i = 0; i < kaardidMängija.size(); i++) {
-            kaardid+="|"+kaardidMängija.get(i)+"|   ";
+            kaardid += "|" + kaardidMängija.get(i) + "|   ";
         }
         text.setText(kaardid);
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
@@ -48,6 +48,7 @@ public class MängijaGraafiline implements KasutajaLiides {
         Scene peamenüü = new Scene(root,600,334);
         stage.setScene(peamenüü);
         root.setCenter(text);
+
         Button nupp1 = new Button("Võtta veel kaart.");
         root.setLeft(nupp1);
         nupp1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -77,27 +78,31 @@ public class MängijaGraafiline implements KasutajaLiides {
 
     @Override
     public void näidaTulemus(int võit, int summaMängija, int summaDiiler) {
-        Text text = new Text();
-        Text text2 = new Text();
-        text.setText("Sinu tulemus: "+ summaMängija+"\n Diileri Tulemus: "+summaDiiler);
-        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
-        text2.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+        Text textKaardidPunktid = new Text();
+        textKaardidPunktid.setText("Sinu kaardid: " + mäng.getKaardidMängija() + "\n" +
+                "Diileri kaardid: " + mäng.getKaardidDiiler() + "\n\n" +
+                "Sinu tulemus: "+ summaMängija+"\n Diileri Tulemus: "+summaDiiler);
+        textKaardidPunktid.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
+
+        Text textTulemus = new Text();
+        textTulemus.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 15));
         if (võit > 0) {
-            text2.setText("Õnnitlen, oled võitja!");
+            textTulemus.setText("Õnnitlen, oled võitja!");
+        } else if (võit < 0) {
+            textTulemus.setText("Diiler võitis, järgmine kord vedab. :)");
+        } else {
+            textTulemus.setText("Mäng jäi viiki.");
         }
-        else if (võit < 0) {
-            text2.setText("Diiler võitis, järgmine kord vedab. :)");
-        }
-        else {
-            text2.setText("Mäng jäi viiki.");
-        }
+
         Button buttonJärgminePartii = new Button();
         buttonJärgminePartii.setText("Alusta uut partii");
+
         BorderPane root = new BorderPane();
         Scene peamenüü = new Scene(root,600,334);
         stage.setScene(peamenüü);
-        root.setCenter(text);
-        root.setBottom(text2);
+        root.setCenter(textKaardidPunktid);
+        root.setBottom(textTulemus);
         root.setLeft(buttonJärgminePartii);
         buttonJärgminePartii.setOnAction(new EventHandler<ActionEvent>() {
             @Override
