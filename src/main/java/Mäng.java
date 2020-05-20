@@ -103,7 +103,6 @@ public class Mäng {
 
     public int arvutadaTulemus() {
         // Võrrelda kaartide summat
-        int tulemus = 0;
         int summaMängija = 0;
         int summaDiiler = 0;
         boolean ületanudÄssMängija = false;
@@ -112,15 +111,15 @@ public class Mäng {
         summaDiiler = Mäng.arvutadaPunkte(kaardidDiiler);
 
         // Võrrelda punktid
-        int võit = 0;
+        int tulemus = 0;
         if (summaMängija > 21 && summaDiiler > 21)
-            võit = 0;
+            tulemus = 0;
         else if (summaMängija > 21)
-            võit = -1;
+            tulemus = -1;
         else if (summaDiiler > 21)
-            võit = 1;
+            tulemus = 1;
         else
-            võit = Integer.compare(summaMängija, summaDiiler);
+            tulemus = Integer.compare(summaMängija, summaDiiler);
 
         return tulemus;
 
