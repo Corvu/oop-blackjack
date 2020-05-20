@@ -9,8 +9,14 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MängijaGraafiline implements KasutajaLiides {
@@ -18,10 +24,30 @@ public class MängijaGraafiline implements KasutajaLiides {
     Stage stage;
 
     private Mäng mäng;
+    private FileWriter logWriter;
 
     public MängijaGraafiline(Stage stage, Mäng mäng) {
+
         this.stage = stage;
         this.mäng = new Mäng();
+
+        try {
+            this.logWriter = new FileWriter("log.txt", StandardCharsets.UTF_8);
+            logWriter.write(LocalDateTime.now() + " Logfail loodud\n");
+        } catch (IOException e) {
+            throw new RuntimeException("Ei saanud logfaili luua.");
+        }
+
+        stage.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                try {
+                    logWriter.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Ei saanud logfaili sulgeda.");
+                }
+            }
+        });
     }
 
     @Override
@@ -73,7 +99,6 @@ public class MängijaGraafiline implements KasutajaLiides {
             }
         });
 
-
     }
 
     @Override
@@ -111,6 +136,12 @@ public class MängijaGraafiline implements KasutajaLiides {
                 näidaLauda(mäng.getKaardidMängija(), mäng.getKaardidDiiler());
             }
         });
+
+        try {
+            logWriter.write(LocalDateTime.now() + " Mängija tulemus: " + võit + "\n");
+        } catch (IOException e) {
+            throw new RuntimeException("Ei saanud logfaili kirjutada");
+        }
     }
 
     @Override
