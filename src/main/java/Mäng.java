@@ -44,6 +44,9 @@ public class Mäng {
         if (täht.equals("J") || täht.equals("Q") || täht.equals("K")) {
             väärtus = 10;
         }
+        else if (kaart.substring(0, 2).equals("10")) {
+            väärtus = 10;
+        }
         else if (täht.equals("A") && !ületanudÄss) {
             väärtus = 11;
         }
